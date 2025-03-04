@@ -1,0 +1,19 @@
+@mixin flex-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin text-styles($color, $font-weight, $line-height) {
+    color: $color;
+    font-weight: $font-weight;
+    line-height: $line-height;
+}
+  
+@mixin responsive-padding($padding) {
+    padding: $padding;
+    // @media (max-width: 768px) {
+    //   padding: $padding / 2;
+    // }
+}

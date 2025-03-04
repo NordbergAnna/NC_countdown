@@ -1,19 +1,17 @@
 @import '../../variables';
+@import '../../_mixins';
 
 .countdown-container {
     width: 100%;
     height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    @include flex-center;
     text-align: center;
     box-sizing: border-box;
     overflow: hidden;
 
 .countdown-inner {
     width: 100%;
-    padding: $padding;
+    @include responsive-padding($padding);
 
 }
   h1, h2 {
@@ -25,14 +23,11 @@
   }
   
   h1 {
-    color: $primary-color;
-    font-weight: 800;
-    line-height: $line-height-h1;
+    @include text-styles($primary-color, 800, $line-height-h1);
   }
-  
+
   h2 {
-    font-weight: 400;
-    line-height: $line-height-h2;
+    @include text-styles($text-color, 400, $line-height-h2);
   }
   
   form {
