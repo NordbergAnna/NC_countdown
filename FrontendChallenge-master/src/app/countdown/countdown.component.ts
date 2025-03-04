@@ -1,6 +1,7 @@
 import { Component, OnInit, ElementRef, ViewChild, HostListener, ChangeDetectorRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { FontSizeService } from '../services/fontsize.service';
 
 @Component({
   selector: 'app-countdown',
@@ -19,7 +20,7 @@ export class CountdownComponent implements OnInit {
   @ViewChild('countdownElement') countdownElement!: ElementRef;
   @ViewChild('countdownContainer') countdownContainer!: ElementRef;
 
-  constructor(private cdr: ChangeDetectorRef) {}
+  constructor(private cdr: ChangeDetectorRef, private fontSizeService: FontSizeService) {}
 
   /**
    * Lifecycle hook that is called after Angular has initialized all data-bound properties of a directive.
@@ -39,16 +40,16 @@ export class CountdownComponent implements OnInit {
    */
     ngAfterViewInit() {
         setTimeout(() => {
-        this.adjustFontSize(this.titleElement.nativeElement);
-        this.adjustFontSize(this.countdownElement.nativeElement);
+            this.fontSizeService.adjustFontSize(this.titleElement.nativeElement, this.countdownContainer.nativeElement);
+            this.fontSizeService.adjustFontSize(this.countdownElement.nativeElement, this.countdownContainer.nativeElement);
         }, 100);
     }
 
 
   @HostListener('window:resize', ['$event'])
   onResize(event: Event) {
-    this.adjustFontSize(this.titleElement.nativeElement);
-    this.adjustFontSize(this.countdownElement.nativeElement);
+    this.fontSizeService.adjustFontSize(this.titleElement.nativeElement, this.countdownContainer.nativeElement);
+    this.fontSizeService.adjustFontSize(this.countdownElement.nativeElement, this.countdownContainer.nativeElement);
   }
 
   /**
@@ -73,7 +74,7 @@ export class CountdownComponent implements OnInit {
     } else {
       this.countdown = 'Please set a valid date to start the countdown.';
     }
-    this.adjustFontSize(this.countdownElement.nativeElement);
+    this.fontSizeService.adjustFontSize(this.countdownElement.nativeElement, this.countdownContainer.nativeElement);
   }
 
   /**
@@ -93,27 +94,12 @@ export class CountdownComponent implements OnInit {
   }
 
   /**
-   * Adjusts the font size of the element to fit the container width.
-   */
-  adjustFontSize(element: HTMLElement) {
-    const containerWidth = this.countdownContainer.nativeElement.clientWidth - 48;
-    let fontSize = 20;
-    element.style.fontSize = `${fontSize}px`;
-    while (element.scrollWidth <= containerWidth && fontSize < 200) {
-      fontSize++;
-      element.style.fontSize = `${fontSize}px`;
-    }
-    element.style.fontSize = `${fontSize - 1}px`;
-    this.cdr.detectChanges();
-  }
-
-  /**
    * Handles the title change event.
    */
   onTitleChange() {
     this.saveToLocalStorage();
     this.cdr.detectChanges();
-    this.adjustFontSize(this.titleElement.nativeElement);
+    this.fontSizeService.adjustFontSize(this.titleElement.nativeElement, this.countdownContainer.nativeElement);
 }
 
 /**
@@ -124,7 +110,7 @@ export class CountdownComponent implements OnInit {
     this.cdr.detectChanges();
     this.updateCountdown();
     this.restartCountdown();
-    this.adjustFontSize(this.countdownElement.nativeElement);
+    this.fontSizeService.adjustFontSize(this.titleElement.nativeElement, this.countdownContainer.nativeElement);
   }
 
   /**
