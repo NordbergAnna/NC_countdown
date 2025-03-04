@@ -21,6 +21,9 @@ export class CountdownComponent implements OnInit {
 
   constructor(private cdr: ChangeDetectorRef) {}
 
+  /**
+   * Lifecycle hook that is called after Angular has initialized all data-bound properties of a directive.
+   */
   ngOnInit() {
     this.loadFromLocalStorage();
     if (this.date) {
@@ -31,6 +34,9 @@ export class CountdownComponent implements OnInit {
     }
   }
 
+  /**
+   * Lifecycle hook that is called after Angular has fully initialized a component's view.
+   */
     ngAfterViewInit() {
         setTimeout(() => {
         this.adjustFontSize(this.titleElement.nativeElement);
@@ -38,12 +44,16 @@ export class CountdownComponent implements OnInit {
         }, 100);
     }
 
+
   @HostListener('window:resize', ['$event'])
   onResize(event: Event) {
     this.adjustFontSize(this.titleElement.nativeElement);
     this.adjustFontSize(this.countdownElement.nativeElement);
   }
 
+  /**
+   * Updates the countdown based on the date set by the user.
+   */
   updateCountdown() {
     if (this.date) {
       const targetDate = new Date(this.date).getTime();
@@ -66,16 +76,25 @@ export class CountdownComponent implements OnInit {
     this.adjustFontSize(this.countdownElement.nativeElement);
   }
 
+  /**
+   * Saves the title and date to the local storage.
+   */
   saveToLocalStorage() {
     localStorage.setItem('title', this.title);
     localStorage.setItem('date', this.date);
   }
 
+  /**
+   * Loads the title and date from the local storage.
+   */
   loadFromLocalStorage() {
     this.title = localStorage.getItem('title') || '';
     this.date = localStorage.getItem('date') || '';
   }
 
+  /**
+   * Adjusts the font size of the element to fit the container width.
+   */
   adjustFontSize(element: HTMLElement) {
     const containerWidth = this.countdownContainer.nativeElement.clientWidth - 48;
     let fontSize = 20;
@@ -88,12 +107,18 @@ export class CountdownComponent implements OnInit {
     this.cdr.detectChanges();
   }
 
+  /**
+   * Handles the title change event.
+   */
   onTitleChange() {
     this.saveToLocalStorage();
     this.cdr.detectChanges();
     this.adjustFontSize(this.titleElement.nativeElement);
 }
 
+/**
+ * Handles the date change event.
+ */
   onDateChange() {
     this.saveToLocalStorage();
     this.cdr.detectChanges();
@@ -102,6 +127,9 @@ export class CountdownComponent implements OnInit {
     this.adjustFontSize(this.countdownElement.nativeElement);
   }
 
+  /**
+   * Restarts the countdown interval.
+   */
    restartCountdown() {
     this.countdownInterval = setInterval(() => {
       this.updateCountdown();
