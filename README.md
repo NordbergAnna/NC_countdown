@@ -16,7 +16,7 @@ Ensure you have the following tools installed on your development machine:
 
    ```bash
    git clone https://github.com/annanordberg/NC_countdown.git
-   cd NC_countdown/FrontendChallenge-master
+   cd NC_countdown
 
 2. **Install dependencies:**
     npm install
