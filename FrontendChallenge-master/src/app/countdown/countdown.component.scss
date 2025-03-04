@@ -1,0 +1,79 @@
+@import '../../variables';
+
+.countdown-container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    box-sizing: border-box;
+    overflow: hidden;
+
+.countdown-inner {
+    width: 100%;
+    padding: $padding;
+
+}
+  h1, h2 {
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    margin: 0;
+    text-align: center;
+  }
+  
+  h1 {
+    color: $primary-color;
+    font-weight: 800;
+    line-height: $line-height-h1;
+  }
+  
+  h2 {
+    font-weight: 400;
+    line-height: $line-height-h2;
+  }
+  
+  form {
+    margin-top: 24px;
+    display: flex;
+    column-gap: $column-gap;
+  
+    label {
+      position: absolute;
+      top: 20px;
+      background: $background-color;
+      color: $text-color;
+      padding: 0 4px;
+      transform: translate(10px, -50%);
+      font-size: $font-size-label;
+    }
+  
+    input {
+      width: 100%;
+      padding: 12px;
+      margin-top: 20px;
+      background: transparent;
+      border: 1px solid $text-color;
+      border-radius: 4px;
+      font-size: $font-size-input;
+      font-family: 'Open Sauce One', sans-serif;
+      outline: none;
+      min-width: 278px;
+    }
+  
+    .input-container {
+      display: flex;
+      position: relative;
+      margin-bottom: 20px;
+      width: 100%;
+    }
+  }
+  
+  @media screen and (max-width: 768px) {
+    form {
+      flex-direction: column;
+    }
+  }
+}

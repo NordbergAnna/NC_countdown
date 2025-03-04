@@ -1,0 +1,16 @@
+<div class="countdown-container">
+<div class="countdown-inner" #countdownContainer>
+    <h1 #titleElement>Time to {{ title }}</h1>
+    <h2 #countdownElement>{{ countdown }}</h2>
+</div>
+<form>
+  <div class="input-container">
+    <label for="title">Title</label>
+    <input type="text" id="title" name="title" [(ngModel)]="title" (ngModelChange)="onTitleChange()">
+  </div>
+  <div class="input-container">
+    <label for="date">Date</label>
+    <input type="date" id="date" name="date" [(ngModel)]="date" (ngModelChange)="onDateChange()">
+  </div>
+</form>
+</div>

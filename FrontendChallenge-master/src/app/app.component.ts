@@ -1,13 +1,16 @@
-import { Component } from '@angular/core'
-import { RouterOutlet } from '@angular/router'
+import { Component, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { CountdownComponent } from './countdown/countdown.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [FormsModule, RouterModule, CountdownComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss',
+  styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
-  title = 'FrontendChallenge'
+export class AppComponent implements OnInit {
+  ngOnInit() {
+  }
 }

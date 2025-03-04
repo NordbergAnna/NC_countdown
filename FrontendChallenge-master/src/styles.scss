@@ -1,8 +1,16 @@
 @import '@fontsource/open-sauce-one/800.css';
 @import '@fontsource/open-sauce-one/400.css';
+@import './variables';
 /* You can add global styles to this file, and also import other style files */
 
 body {
   margin: 0;
-  background-color: #F5F3F3;
+  background-color: $background-color;
+  font-family: 'Open Sauce One', sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
