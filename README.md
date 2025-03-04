@@ -2,6 +2,8 @@
 
 This project is a countdown timer application built with Angular. It allows users to set a title and a date, and it will display the time remaining until that date.
 
+https://nordberganna.github.io/NC_countdown/
+
 ## Prerequisites
 
 Ensure you have the following tools installed on your development machine:
