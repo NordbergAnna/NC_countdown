@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ElementRef, ViewChild, HostListener, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, HostListener, ChangeDetectorRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
@@ -9,7 +9,7 @@ import { RouterModule } from '@angular/router';
   templateUrl: './countdown.component.html',
   styleUrls: ['./countdown.component.scss'],
 })
-export class CountdownComponent implements OnInit, AfterViewInit {
+export class CountdownComponent implements OnInit {
   title: string = '';
   date: string = '';
   countdown: string = '';
@@ -23,20 +23,20 @@ export class CountdownComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.loadFromLocalStorage();
-    if (this.date && !isNaN(new Date(this.date).getTime())) {
-      this.updateCountdown();
-      this.restartCountdown();
+    if (this.date) {
+        this.restartCountdown();
+        this.updateCountdown();
     } else {
       this.countdown = 'Please set a valid date to start the countdown.';
     }
   }
 
-  ngAfterViewInit() {
-    setTimeout(() => {
-      this.adjustFontSize(this.titleElement.nativeElement);
-      this.adjustFontSize(this.countdownElement.nativeElement);
-    }, 100);
-  }
+    ngAfterViewInit() {
+        setTimeout(() => {
+        this.adjustFontSize(this.titleElement.nativeElement);
+        this.adjustFontSize(this.countdownElement.nativeElement);
+        }, 100);
+    }
 
   @HostListener('window:resize', ['$event'])
   onResize(event: Event) {
@@ -45,7 +45,7 @@ export class CountdownComponent implements OnInit, AfterViewInit {
   }
 
   updateCountdown() {
-    if (this.date && !isNaN(new Date(this.date).getTime())) {
+    if (this.date) {
       const targetDate = new Date(this.date).getTime();
       const now = new Date().getTime();
       const distance = targetDate - now;
@@ -78,7 +78,7 @@ export class CountdownComponent implements OnInit, AfterViewInit {
 
   adjustFontSize(element: HTMLElement) {
     const containerWidth = this.countdownContainer.nativeElement.clientWidth - 48;
-    let fontSize = 10;
+    let fontSize = 20;
     element.style.fontSize = `${fontSize}px`;
     while (element.scrollWidth <= containerWidth && fontSize < 200) {
       fontSize++;
@@ -91,10 +91,8 @@ export class CountdownComponent implements OnInit, AfterViewInit {
   onTitleChange() {
     this.saveToLocalStorage();
     this.cdr.detectChanges();
-    setTimeout(() => {
-      this.adjustFontSize(this.titleElement.nativeElement);
-    }, 0);
-  }
+    this.adjustFontSize(this.titleElement.nativeElement);
+}
 
   onDateChange() {
     this.saveToLocalStorage();
@@ -102,15 +100,9 @@ export class CountdownComponent implements OnInit, AfterViewInit {
     this.updateCountdown();
     this.restartCountdown();
     this.adjustFontSize(this.countdownElement.nativeElement);
-    setTimeout(() => {
-      this.adjustFontSize(this.countdownElement.nativeElement);
-    }, 0);
   }
 
-  restartCountdown() {
-    if (this.countdownInterval) {
-      clearInterval(this.countdownInterval);
-    }
+   restartCountdown() {
     this.countdownInterval = setInterval(() => {
       this.updateCountdown();
     }, 1000);
