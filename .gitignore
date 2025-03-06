@@ -1,3 +1,7 @@
 node_modules
 /.angular
 /.angular/cache/17.3.6/FrontendChallenge
+/.angular/cache/17.3.6
+.angular/cache/17.3.6/FrontendChallenge/.tsbuildinfo
+/dist/browser
+/dist

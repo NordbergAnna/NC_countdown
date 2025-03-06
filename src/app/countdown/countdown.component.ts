@@ -16,10 +16,16 @@ export class CountdownComponent implements OnInit {
   countdown: string = '';
   countdownInterval: any;
 
+  /**
+   * The container element that will be used to adjust the font size of the countdown.
+  */
   @ViewChild('countdownContainer') countdownContainer!: ElementRef;
 
   constructor(private cdr: ChangeDetectorRef) {}
 
+  /**
+   *  Initialize the countdown component.
+   */
   ngOnInit() {
     this.loadFromLocalStorage();
     if (this.date) {
@@ -29,7 +35,9 @@ export class CountdownComponent implements OnInit {
       this.countdown = 'Please set a valid date to start the countdown.';
     }
   }
-
+/**
+ * Update the countdown to the target date.
+ */
   updateCountdown() {
     if (this.date) {
       const targetDate = new Date(this.date).getTime();
@@ -73,6 +81,9 @@ export class CountdownComponent implements OnInit {
     this.restartCountdown();
   }
 
+  /**
+   * Restart the countdown interval.
+   */
   restartCountdown() {
     this.countdownInterval = setInterval(() => {
       this.updateCountdown();
