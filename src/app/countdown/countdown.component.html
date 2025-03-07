@@ -1,7 +1,7 @@
-<div class="countdown-container">
-<div class="countdown-inner" #countdownContainer>
-  <h1 [appAutoResize]="countdownContainer">Time to {{ title }}</h1>
-  <h2 [appAutoResize]="countdownContainer">{{ countdown }}</h2>
+<div class="resize-container countdown-container">
+<div class="resize-inner countdown-inner" #autoResizeContainer>
+  <h1 [appAutoResize]="autoResizeContainer">Time to {{ title }}</h1>
+  <h2 [appAutoResize]="autoResizeContainer">{{ countdown }}</h2>
 </div>
 <form>
   <div class="input-container">

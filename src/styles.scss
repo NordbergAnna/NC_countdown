@@ -6,8 +6,27 @@
 
 body {
   margin: 0;
+  height: 100vh;
   background-color: $background-color;
   font-family: 'Open Sauce One', sans-serif;
+  white-space: nowrap;
+}
+
+
+/* Global class to use where autoresize function is used */
+.resize-container {
+  width: 100%;
+  @include flex-center;
+  text-align: center;
+  box-sizing: border-box;
+  overflow: hidden;
+
+  .resize-inner {
+      width: 100%;
+      @include responsive-padding($padding);
+  
+  }
+
 }
 
 *,

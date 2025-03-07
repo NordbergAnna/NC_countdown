@@ -5,6 +5,7 @@ import { ChangeDetectorRef } from '@angular/core';
 @Directive({
   selector: '[appAutoResize]',
   standalone: true,
+  providers: [FontSizeService]
 })
 export class AutoResizeDirective implements AfterViewInit {
   @Input('appAutoResize') container!: HTMLElement;
